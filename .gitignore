@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# This file is a copy of GamesLoan.Api/appsettings.json and is necessary on tests
+!*/GamesLoan.Tests/bin/Debug/net5.0/appsettings.json
+
 # User-specific files
 *.rsuser
 *.suo
