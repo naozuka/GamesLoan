@@ -1,0 +1,1824 @@
+{
+	"info": {
+		"_postman_id": "6cbe71d7-012f-42ec-8f8a-ab774af02ff0",
+		"name": "GamesLoan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "New",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{        \r\n    \"Email\": \"john@gmail.com\",\r\n    \"Password\": \"John*123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/login/new",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"login",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"token = jsonData.token;\r",
+									"pm.environment.set(\"token\", token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{        \r\n    \"Email\": \"john@gmail.com\",\r\n    \"Password\": \"John*123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/login",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"token = jsonData.token;\r",
+									"pm.environment.set(\"token\", token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/login/refresh-token",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"login",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Friends",
+			"item": [
+				{
+					"name": "Friends - List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/friends",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"friends"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Friends - Select",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/friends/2",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"friends",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Friends - Add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{        \r\n    \"Name\": \"João Paulo\",\r\n    \"PhoneNumber\": \"1331-1111\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/friends",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"friends"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Friends - Edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{        \r\n    \"Id\": 1,\r\n    \"Name\": \"Ruanzito\",\r\n    \"PhoneNumber\": \"33333-3333\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/friends/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"friends",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Friends - Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/friends/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"friends",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Games",
+			"item": [
+				{
+					"name": "Games - List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/games",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Games - Select",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/games/5",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"games",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Games - Add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{        \r\n    \"Name\": \"God of War: Ghost of Sparta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/games",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Games - Edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{        \r\n    \"Id\": 7,\r\n    \"Name\": \"God of War 3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/games/7",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"games",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Games - Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/games/3",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"games",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Games - Lend",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{        \r\n    \"GameId\": 9,    \r\n    \"FriendId\": 9\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/games/lend",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"games",
+								"lend"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Games - Return",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{        \r\n    \"GameId\": 9    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/games/return",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"games",
+								"return"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tests",
+			"item": [
+				{
+					"name": "Login",
+					"item": [
+						{
+							"name": "Create New Login",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const email = pm.variables.replaceIn(\"{{$randomExampleEmail}}\");\r",
+											"const password = pm.variables.replaceIn(\"{{$randomPassword}}\");\r",
+											"\r",
+											"pm.environment.set(\"email\", email);\r",
+											"pm.environment.set(\"password\", password);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create new login\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{        \r\n    \"Email\": \"{{email}}\",\r\n    \"Password\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/login/new",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"login",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Authenticate Login",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"token = jsonData.token;\r",
+											"pm.environment.set(\"token\", token);\r",
+											"\r",
+											"pm.test(\"Authenticate login\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.true;    \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{        \r\n    \"Email\": \"{{email}}\",\r\n    \"Password\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/login",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"token = jsonData.token;\r",
+											"pm.environment.set(\"token\", token);\r",
+											"\r",
+											"pm.test(\"Update token\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/login/refresh-token",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"login",
+										"refresh-token"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Friends",
+					"item": [
+						{
+							"name": "Add 1st Friend",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Add First Friend\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{        \r\n    \"Name\": \"{{$randomFullName}}\",\r\n    \"PhoneNumber\": \"{{$randomPhoneNumber}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/friends",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"friends"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add 2nd Friend",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Add Second Friend\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{        \r\n    \"Name\": \"{{$randomFullName}}\",\r\n    \"PhoneNumber\": \"{{$randomPhoneNumber}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/friends",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"friends"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Should Have 2 Friends",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should Have 2 Friends\", function () {    \r",
+											"    jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.friendsDto.length).to.be.equal(2);\r",
+											"\r",
+											"    pm.environment.set(\"firstFriendId\", jsonData.friendsDto[0].id);    \r",
+											"\r",
+											"    pm.environment.set(\"secondFriendId\", jsonData.friendsDto[1].id);\r",
+											"    pm.environment.set(\"secondFriendName\", jsonData.friendsDto[1].name);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/friends",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"friends"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validate 2nd Friend Name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Validate 2nd Friend Name\", function () {    \r",
+											"    jsonData = pm.response.json();\r",
+											"    \r",
+											"    let friendName = pm.variables.get(\"secondFriendName\");\r",
+											"    pm.expect(jsonData.friendDto.name).to.equal(friendName);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/friends/{{secondFriendId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"friends",
+										"{{secondFriendId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit 2nd Friend",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const newName = pm.variables.replaceIn(\"{{$randomFullName}}\");\r",
+											"pm.environment.set(\"secondFriendName\", newName);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Edit 2nd Friend\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{        \r\n    \"Id\": {{secondFriendId}},\r\n    \"Name\": \"{{secondFriendName}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/friends/{{secondFriendId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"friends",
+										"{{secondFriendId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validate Edit 2nd Friend",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Validate Edit 2nd Friend\", function () {    \r",
+											"    jsonData = pm.response.json();\r",
+											"    \r",
+											"    let friendName = pm.variables.get(\"secondFriendName\");\r",
+											"    pm.expect(jsonData.friendDto.name).to.equal(friendName);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/friends/{{secondFriendId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"friends",
+										"{{secondFriendId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete 1st Friend",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Delete 1st Friend\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/friends/{{firstFriendId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"friends",
+										"{{firstFriendId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validate Delete 1st Friend",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Validate Delete 1st Friend\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.false;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/friends/{{firstFriendId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"friends",
+										"{{firstFriendId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Games",
+					"item": [
+						{
+							"name": "Add 1st Game",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Add First Game\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const firstGameName = \"Suikoden II\";\r",
+											"pm.environment.set(\"firstGameName\", firstGameName);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{        \r\n    \"Name\": \"{{firstGameName}}\"    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/games",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"games"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add 2nd Game",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Add Second Game\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const secondGameName = \"Final Fantasy Tactics\";\r",
+											"pm.environment.set(\"secondGameName\", secondGameName);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{        \r\n    \"Name\": \"{{secondGameName}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/games",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"games"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Should Have 2 Games",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should Have 2 Games\", function () {    \r",
+											"    jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.gamesDto.length).to.be.equal(2);\r",
+											"\r",
+											"    pm.environment.set(\"firstGameId\", jsonData.gamesDto[0].id);\r",
+											"\r",
+											"    pm.environment.set(\"secondGameId\", jsonData.gamesDto[1].id);\r",
+											"    pm.environment.set(\"secondGameName\", jsonData.gamesDto[1].name);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/games",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"games"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validate 2nd Game Name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Validate 2nd Game Name\", function () {    \r",
+											"    jsonData = pm.response.json();\r",
+											"    \r",
+											"    let gameName = pm.variables.get(\"secondGameName\");\r",
+											"    pm.expect(jsonData.gameDto.name).to.equal(gameName);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/games/{{secondGameId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"games",
+										"{{secondGameId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit 2nd Game",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const newName = \"God of War: Chains of Olympus\";\r",
+											"pm.environment.set(\"secondGameName\", newName);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Edit 2nd Game\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{        \r\n    \"Id\": {{secondGameId}},\r\n    \"Name\": \"{{secondGameName}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/games/{{secondGameId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"games",
+										"{{secondGameId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validate Edit 2nd Game",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Validate Edit 2nd Game\", function () {    \r",
+											"    jsonData = pm.response.json();\r",
+											"    \r",
+											"    let gameName = pm.variables.get(\"secondGameName\");\r",
+											"    pm.expect(jsonData.gameDto.name).to.equal(gameName);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/games/{{secondGameId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"games",
+										"{{secondGameId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete 1st Game",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Delete 1st Game\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/games/{{firstGameId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"games",
+										"{{firstGameId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Validate Delete 1st Game",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Validate Delete 1st Game\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.false;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/games/{{firstGameId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"games",
+										"{{firstGameId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lend 2nd Game to 2nd Friend",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Lend 2nd Game to 2nd Friend\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{        \r\n    \"GameId\": {{secondGameId}},    \r\n    \"FriendId\": {{secondFriendId}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/games/lend",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"games",
+										"lend"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lend 2nd Game Again",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Lend 2nd Game to 2nd Friend Again\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.false;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{        \r\n    \"GameId\": {{secondGameId}},    \r\n    \"FriendId\": {{secondFriendId}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/games/lend",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"games",
+										"lend"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Return 2nd Game",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Return 2nd Game\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{        \r\n    \"GameId\": {{secondGameId}}    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/games/return",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"games",
+										"return"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Return 2nd Game Again",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Return 2nd Game Again\", function () {\r",
+											"    pm.expect(pm.response.json().success).to.be.false;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{        \r\n    \"GameId\": {{secondGameId}}    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/games/return",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"games",
+										"return"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

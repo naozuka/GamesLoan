@@ -11,7 +11,7 @@ namespace GamesLoan.Api.Controllers
         [AllowAnonymous]
         public ActionResult<string> Foo()
         {            
-            return Ok("O que sabemos é uma gota. O que não sabemos é um oceano. (Dark)");
+            return Ok("\"What we know is a drop. What we don't know, is an ocean\". (Dark)");
         }        
     }
 }
